@@ -9,7 +9,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         System.out.println("Hello world!");
 
         List<Employee> empList =new ArrayList<Employee>();
@@ -21,9 +22,16 @@ public class Main {
 
     // Q1. Grouping employee by city
 
-        Map<String, List<Employee> > empByCity= new HashMap<>();
+//        Map<String, List<Employee> > empByCity= new HashMap<>();
+//
+//        empByCity= empList.stream().collect(Collectors.groupingBy(Employee::getCity));
+//       //System.out.println(empByCity);
+//        empByCity.forEach((k,v)-> System.out.println(k+" "+v));
 
-        empByCity= empList.stream().collect(Collectors.groupingBy(Employee::getCity));
-        System.out.println(empByCity);
+
+
+
+
+
     }
 }
