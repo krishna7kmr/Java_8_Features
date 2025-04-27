@@ -3,7 +3,9 @@ package starter;
 import entity.Employee;
 
 import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args)
@@ -15,7 +17,8 @@ public class Main {
         empList.add( new Employee(2,"Rinki",30,400,"F","HR","Delhi",2022) );
         empList.add( new Employee(3,"Raja",35,700,"M","IT","Hyderabad",2016) );
         empList.add( new Employee(4,"Amit",22,900,"M","IT","Pune",2018) );
-        empList.add( new Employee(5,"Rahim",40,1020,"M","HR","Kolkata",2019) );
+        empList.add( new Employee(5,"Barun",40,1020,"M","HR","Hyderabad",2019) );
+        empList.add( new Employee(6,"Hyena",27,3000,"M","HR","Lucknow",2018) );
 
     // Q1. Grouping employee by city
 
@@ -72,14 +75,125 @@ public class Main {
 //            System.out.println("No employee find in list");
 //        }
 
-        //Q10 Find the youngest female employee
-        Optional<Employee> youngestFemale= empList.stream().filter(i -> i.getGender().equals("F")).min(Comparator.comparing(Employee::getAge));
-        if(youngestFemale.isPresent()){
-            System.out.println(youngestFemale.get());
-        }
-        else{
-            System.out.println("No   female employee found in list");
-        }
+//        //Q10 Find the youngest female employee
+//        Optional<Employee> youngestFemale= empList.stream().filter(i -> i.getGender().equals("F")).min(Comparator.comparing(Employee::getAge));
+//        if(youngestFemale.isPresent()){
+//            System.out.println(youngestFemale.get());
+//        }
+//        else{
+//            System.out.println("No   female employee found in list");
+//        }
+
+
+        //Q.11 Finding  employee by age range
+//        Map<Boolean, List<Employee>> collect = empList.stream().collect(Collectors.partitioningBy(e -> e.getAge() > 30));
+//       // collect.forEach((k,v)-> System.out.println(k+" "+v));
+//
+//        Set< Map.Entry< Boolean, List< Employee> > > entries = collect.entrySet();
+//
+//        for(Map.Entry< Boolean, List< Employee> > entry: entries){
+//            if(Boolean.TRUE.equals(entry.getKey())){
+//                System.out.println("Employee greater than 30  years:: "+entry.getValue());
+//            }
+//        }
+
+        //Q.12 Finding Department with  the Highest Number of Employee
+
+//        Map<String, Long> groupingByDepartName = empList.stream().collect(Collectors.groupingBy(Employee::getDeptName, Collectors.counting()));
+//        //groupingByDepartName.forEach((k,v)-> System.out.println(k+" "+v));
+//
+//        Optional<Map.Entry<String, Long>> max = groupingByDepartName.entrySet().stream().max(Map.Entry.comparingByValue());
+//
+//        if(max.isPresent()){
+//            System.out.println(max.get());
+//        }
+        //Q.13 Finding Employee from HR Department
+
+//        Optional<Employee> opt = empList.stream().filter(i -> i.getDeptName().equalsIgnoreCase("HR")).findAny();
+//        if(opt.isPresent()){
+//            System.out.println(opt.get());
+//        }
+
+//        //Q.14 Finding Departments  with Over 3 Employees
+//        Map<String, Long> collect   = empList.stream().collect(Collectors.groupingBy(Employee::getDeptName, Collectors.counting()));
+//
+//        collect.entrySet().stream().filter(i -> i.getValue() > 3).forEach(System.out::println);
+
+        //Q.15 Fining Distinct Department Names
+
+        //empList.stream().map(Employee::getDeptName).distinct().forEach(System.out::println);
+
+        //Q.16  Finding and sorting Employee by City
+//        empList.stream().filter(i->i.getCity().equalsIgnoreCase("Hyderabad"))
+//                .sorted(Comparator.comparing(Employee::getName))
+//                .forEach(i->System.out.println(i));
+        // Q.17 Counting the number of employees in the organization
+//        long count = empList.stream().count();
+//        System.out.println("Total employees in the organization  "+count);
+
+        //Q.18 Finding employee count in every  department
+//      Map<String,Long> mpCountByDet=  empList.stream().collect(Collectors.groupingBy(Employee::getDeptName,Collectors.counting()));
+//        mpCountByDet.forEach((k,v)->System.out.println(k+" "+v));
+
+        //Q.19 Find the department with the  highest number of employee
+//        Map<String, Long> collect = empList.stream().collect(Collectors.groupingBy(Employee::getDeptName, Collectors.counting()));
+//
+//        Optional<Map.Entry<String, Long>> max = collect.entrySet().stream().max(Map.Entry.comparingByValue());
+//
+//        if(max.isPresent()){
+//            System.out.println(max.get());
+//        }
+
+        //Q.20 Sort employee by name and age
+//      Comparator<Employee> comparator1=  Comparator.comparing(Employee:: getName);
+//      Comparator<Employee> comparator2= Comparator.comparing(Employee::getAge);
+//
+//      empList.stream().sorted(comparator1.thenComparing(comparator2))
+//              .forEach(System.out::println);
+
+        //Q.21 Finding the Highest Experienced Employee
+
+//        Optional<Employee> first = empList.stream().sorted(Comparator.comparingInt(Employee::getYearOfJoining)).findFirst();
+//        if(first.isPresent()){
+//            System.out.println("Experienced employee "+first.get());
+//        }
+
+        //Q.22 Printing  average and total salary of the organization
+
+//        DoubleSummaryStatistics empSalary = empList.stream().collect(Collectors.summarizingDouble(Employee::getSalary));
+//        System.out.println("Average salary "+empSalary.getAverage());
+//        System.out.println("Total salary "+empSalary.getSum());
+//
+//        System.out.println("Total salary "+empSalary.getMin());
+
+        //Q.23  Printing average Salary of Each Department
+//        Map<String, Double> avgSalaryByDept = empList.stream()
+//                .collect(Collectors.groupingBy(Employee::getDeptName,
+//                Collectors.averagingDouble(Employee::getSalary)));
+//        avgSalaryByDept.forEach((k,v)->System.out.println(k+ " "+v));
+
+
+        // Q.24 Find the highest salary in the organization   here i am using max()
+//     Optional<Employee>  maxSalary= empList.stream().max(Comparator.comparingDouble(Employee::getSalary));
+//     if(maxSalary.isPresent()){
+//         System.out.println("Max salary of employee "+maxSalary.get().getSalary());
+//     }
+
+        // Q.24 Find the highest salary in the organization , try to not used max()
+//        Optional<Employee>  maxSalary=    empList.stream().sorted(Comparator.comparing(Employee::getSalary).reversed()).findFirst();
+//        if(maxSalary.isPresent()){
+//            System.out.println("Max salary of employee "+maxSalary.get().getSalary());
+//        }
+
+      // Q.25 Find the  second the highest salary in the organization
+
+
+
+
+
+
+
+
 
     }
 }
